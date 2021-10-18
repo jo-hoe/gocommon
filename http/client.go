@@ -33,7 +33,7 @@ func NewHttpClientWithHeader(headerName string, headerValue string) *http.Client
 }
 
 // creates an http client which injects a http headers for each request
-func NewHttpClient(defaultHeaders map[string]string) *http.Client {
+func NewHttpClientWithHeaders(defaultHeaders map[string]string) *http.Client {
 	client := http.Client{
 		Transport: NewAddHeaderTransport(nil, defaultHeaders),
 	}

@@ -11,14 +11,13 @@ func (mockRoundTripper *mockRoundTripper) RoundTrip(*http.Request) (*http.Respon
 	return nil, nil
 }
 
-
 var headers = map[string]string{
 	"a": "aa",
 	"b": "bb",
 }
 
 func TestNewHttpClient(t *testing.T) {
-	client := NewHttpClient(headers)
+	client := NewHttpClientWithHeaders(headers)
 
 	if client.Transport == nil {
 		t.Error("client.Transport was nil")
@@ -46,8 +45,8 @@ func TestRoundTrip(t *testing.T) {
 	if err != nil {
 		t.Errorf("Error is not nil but '%v'", err)
 	}
-	
-	for name, value := range headers{
+
+	for name, value := range headers {
 		if mockRequest.Header.Get(name) != value {
 			t.Errorf("Expected %v but found %v", value, mockRequest.Header.Get(name))
 		}
