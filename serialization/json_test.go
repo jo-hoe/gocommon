@@ -2,9 +2,10 @@ package serialization
 
 import "testing"
 
-type Person struct {
-	name string
-	age  int
+// mock struct
+type MockPerson struct {
+	Name string `json:"name"`
+	Age  int
 }
 
 func TestToJSON(t *testing.T) {
@@ -23,6 +24,16 @@ func TestToJSON(t *testing.T) {
 				in: "my test string",
 			},
 			want:    "my test string",
+			wantErr: false,
+		}, {
+			name: "struct test",
+			args: args{
+				in: MockPerson{
+					Name: "paul",
+					Age:  21,
+				},
+			},
+			want:    "{\"name\":\"paul\",\"Age\":21}",
 			wantErr: false,
 		},
 	}
