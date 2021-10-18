@@ -24,7 +24,7 @@ func NewAddHeaderTransport(T http.RoundTripper, headers map[string]string) *AddH
 
 // creates an http client with injects a http header for each request
 func NewHttpClientWithHeader(headerName string, headerValue string) *http.Client {
-	headers := make(map[string]string, 1)
+	headers := make(map[string]string)
 	headers[headerName] = headerValue
 	client := http.Client{
 		Transport: NewAddHeaderTransport(nil, headers),
